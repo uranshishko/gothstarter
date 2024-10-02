@@ -1,0 +1,17 @@
+{
+  "name": "gothstarter",
+  "version": "1.0.0",
+  "description": "go project boilerplate (chi, templ, HTMX, tailwind)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css": "tailwindcss -i ./views/css/app.css -o ./public/styles.css --minify",
+    "build": "npm run css"
+  },
+  "author": "Uran Shishko",
+  "license": "ISC",
+  "devDependencies": {
+    "daisyui": "^4.12.6",
+    "tailwindcss": "^3.4.4"
+  }
+}

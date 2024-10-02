@@ -1,0 +1,7 @@
+.env
+node_modules
+bin
+public/**/*.css
+public/**/*.js
+public/**/*.map
+tmp

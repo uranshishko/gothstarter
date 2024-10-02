@@ -1,0 +1,11 @@
+package layouts
+
+templ Base(title string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		@Head(title)
+		<body>
+			{ children... }
+		</body>
+	</html>
+}

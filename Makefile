@@ -1,7 +1,7 @@
-run: npm generate build
+run: build
 	@./bin/app
 
-build:
+build: npm generate
 	@go build -o bin/app .
 
 generate:

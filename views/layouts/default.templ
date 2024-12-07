@@ -1,0 +1,71 @@
+package layouts
+
+import (
+	"github.com/uranshishko/gothstarter/auth"
+	"github.com/uranshishko/gothstarter/views/icons"
+	"github.com/uranshishko/gothstarter/views/stores"
+	"github.com/uranshishko/gothstarter/views/ui"
+)
+
+type MenuItem struct {
+	Name string
+	Icon templ.Component
+	Href string
+}
+
+func (m MenuItem) IsActive(path string) bool {
+	return m.Href == path
+}
+
+var Items = []MenuItem{
+	{Name: "Home", Icon: icons.Icon().WithSize(icons.SM).Home(), Href: "/"},
+}
+
+type DefaultLayout struct {
+	Title string
+	Href  string
+	User  auth.User
+}
+
+templ (l DefaultLayout) Root() {
+	@Base(l.Title) {
+		@stores.ToastGlobalStore()
+		@ui.Drawer() {
+			@ui.DrawerContent() {
+				@ui.Navbar() {
+					@ui.NavbarStart() {
+						@ui.DrawerButton(templ.Attributes{}) {
+							@icons.Icon().Menu()
+						}
+						<img x-show="!isExpanded" src="/public/acme.svg" width="150" class="p-2" alt="placeholder logo"/>
+					}
+					@ui.NavbarEnd() {
+						@ui.UserButton(l.User)
+					}
+				}
+				<div class="h-full overflow-y-auto p-4">
+					{ children... }
+				</div>
+			}
+			@ui.DrawerSide() {
+				<div class="w-full flex items-center justify-center h-16">
+					<img src="/public/acme.svg" width="150" class="p-2" alt="placeholder logo"/>
+				</div>
+				for _, item := range Items {
+					<li class="mb-1">
+						<a
+							href={ templ.URL(item.Href) }
+							class={ templ.KV("bg-primary bg-opacity-95 !border-l-teal-700 ", 
+              item.IsActive(l.Href)), "border-l-8 border-l-transparent hover:border-l-gray-500" }
+							@click="isExpanded = false"
+						>
+							@item.Icon
+							{ item.Name }
+						</a>
+					</li>
+				}
+			}
+		}
+		@ui.Toast()
+	}
+}

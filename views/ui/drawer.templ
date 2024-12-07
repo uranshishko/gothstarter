@@ -1,0 +1,33 @@
+package ui
+
+templ Drawer() {
+	<div class="drawer" x-data="{ isExpanded: false }" :class="{ 'lg:drawer-open': isExpanded }">
+		<input id="app-drawer" :checked="isExpanded" type="checkbox" class="drawer-toggle"/>
+		{ children... }
+	</div>
+}
+
+templ DrawerSide() {
+	<div class="drawer-side z-40">
+		<label @click="isExpanded = false" aria-label="close sidebar" class="hidden lg:drawer-overlay"></label>
+		<label for="app-drawer" aria-label="close sidebar" class="lg:hidden drawer-overlay"></label>
+		<ul hx-boost="true" x-transition class="menu border-r border-base-300 bg-base-100 text-base-content min-h-full p-0 [&_li>*]:rounded-none w-60">
+			{ children... }
+		</ul>
+	</div>
+}
+
+templ DrawerContent() {
+	<div class="drawer-content h-full min-h-dvh max-h-dvh grid grid-rows-[auto_1fr] bg-base-200 overflow-hidden">
+		{ children... }
+	</div>
+}
+
+templ DrawerButton(attrs templ.Attributes) {
+	<label class="hidden lg:flex btn btn-ghost btn-square drawer-button" { attrs... } @click="isExpanded = !isExpanded">
+		{ children... }
+	</label>
+	<label for="app-drawer" class="flex lg:hidden btn btn-ghost btn-square drawer-button" { attrs... }>
+		{ children... }
+	</label>
+}

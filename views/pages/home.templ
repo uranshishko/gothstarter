@@ -1,0 +1,16 @@
+package pages
+
+import (
+	"github.com/uranshishko/gothstarter/auth"
+	"github.com/uranshishko/gothstarter/views/layouts"
+)
+
+templ HomePage(user auth.User) {
+	@layouts.DefaultLayout{
+		Title: "Home | Acme",
+		Href:  "/",
+		User:  user,
+	}.Root() {
+		<p>Hello World</p>
+	}
+}

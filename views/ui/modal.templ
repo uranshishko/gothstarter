@@ -1,0 +1,37 @@
+package ui
+
+import "fmt"
+
+templ Modal(id string, label any) {
+	@modalWrapper(
+		id,
+		label,
+		templ.Attributes{"onclick": fmt.Sprintf("%s.showModal()", id)},
+	) {
+		{ children... }
+	}
+}
+
+templ modalWrapper(id string, label any, attrs templ.Attributes) {
+	if s, ok := label.(string); ok {
+		<div role="button" class="btn" { attrs... }>
+			{ s }
+		</div>
+	} else if c, ok := label.(templ.Component); ok {
+		@c
+	}
+	<dialog class="modal modal-bottom sm:modal-middle" id={ id }>
+		<div class="modal-box">
+			{ children... }
+		</div>
+		<form method="dialog" class="modal-backdrop">
+			<button>close</button>
+		</form>
+	</dialog>
+}
+
+templ ModalAction() {
+	<div class="modal-action">
+		{ children... }
+	</div>
+}

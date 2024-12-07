@@ -1,0 +1,19 @@
+package ui
+
+import "github.com/uranshishko/gothstarter/views/icons"
+
+templ Toast() {
+	<div x-data class="toast lg:toast-end toast-bottom toast-center">
+		<template x-for="(toast, index) in $store.toast.toasts" :key="index">
+			<div class="alert" :class="toast.type === 'error' ? 'alert-error' : 'alert-info'">
+				<template x-if="toast.type === 'error'">
+					@icons.Icon().Danger()
+				</template>
+				<template x-if="toast.type !== 'error'">
+					@icons.Icon().Info()
+				</template>
+				<span x-text="toast.message"></span>
+			</div>
+		</template>
+	</div>
+}

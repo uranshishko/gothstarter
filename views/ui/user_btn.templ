@@ -1,0 +1,74 @@
+package ui
+
+import (
+	"github.com/uranshishko/gothstarter/auth"
+	"github.com/uranshishko/gothstarter/views/icons"
+	"strings"
+)
+
+func initials(name string) string {
+	if name == "" {
+		return "?"
+	}
+
+	nameArr := strings.Split(name, " ")
+	f := nameArr[0][0]
+	l := nameArr[len(nameArr)-1][0]
+
+	return strings.ToUpper(string(f) + string(l))
+}
+
+templ UserButton(user auth.User) {
+	<div class="dropdown dropdown-end">
+		@avatarBtn(user.DisplayName)
+		@Modal("logoutModal", userMenu(user)) {
+			<h3 class="text-lg">Logout?</h3>
+			<p>Are you sure you want to logout?</p>
+			@ModalAction() {
+				<a href="/auth/logout" class="btn btn-error">Logout</a>
+				<a role="button" class="btn btn-ghost" onclick="logoutModal.close()">Cancel</a>
+			}
+		}
+	</div>
+}
+
+templ avatarBtn(name string) {
+	<div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar placeholder">
+		<div class="w-10 rounded-full bg-primary text-primary-content">
+			<span>{ initials(name) }</span>
+		</div>
+	</div>
+}
+
+templ userMenu(user auth.User) {
+	<ul
+		tabindex="0"
+		class="menu overflow-hidden dropdown-content bg-base-100 rounded-box !z-50 mt-3 p-0 [&_li>*]:rounded-none lg:w-70 w-[300px] shadow"
+	>
+		<li class="py-2 pointer-events-none">
+			<div class="flex items-center gap-3">
+				<div class="avatar placeholder">
+					<div class="w-10 rounded-full bg-primary text-primary-content">
+						<span>{ initials(user.DisplayName) }</span>
+					</div>
+				</div>
+				<div>
+					<div class="font-bold">{ user.DisplayName }</div>
+					<div class="text-sm opacity-50">{ user.Mail }</div>
+				</div>
+			</div>
+		</li>
+		<li class="disabled">
+			<a>
+				@icons.Icon().WithSize(icons.SM).Cog()
+				Settings
+			</a>
+		</li>
+		<li>
+			<a onclick="logoutModal.showModal()">
+				@icons.Icon().WithSize(icons.SM).Exit()
+				Logout
+			</a>
+		</li>
+	</ul>
+}

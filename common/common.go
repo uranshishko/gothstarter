@@ -1,9 +1,8 @@
-package handlers
+package common
 
 import (
 	"cmp"
 	"encoding/json"
-	"log/slog"
 	"net/http"
 	"net/url"
 	"os"
@@ -21,7 +20,7 @@ func Make(h HTTPHandler) http.HandlerFunc {
 		hc := NewHandlerContext(w, r)
 
 		if err := h(hc); err != nil {
-			slog.Error("HTTP handler error", "err", err, "path", r.URL.Path)
+			_ = hc.JSON(400, Map{"message": err.Error()})
 		}
 	}
 }

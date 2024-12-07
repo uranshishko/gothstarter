@@ -1,0 +1,11 @@
+package ui
+
+templ LazyLoad(url string) {
+	<div
+		hx-get={ url }
+		hx-swap="outerHTML"
+		hx-trigger="load"
+	>
+		{ children... }
+	</div>
+}

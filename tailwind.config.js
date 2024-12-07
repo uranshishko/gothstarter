@@ -26,6 +26,8 @@ module.exports = {
           "warning-content": "#110200",
           error: "#ff7386",
           "error-content": "#160506",
+          "--rounded-box": "0.5rem",
+          "--rounded-btn": "0.25rem",
         },
       },
     ],

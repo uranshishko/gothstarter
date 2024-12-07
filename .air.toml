@@ -21,7 +21,7 @@ args_bin = []
 # Watch these filename extensions.
 include_ext = ["go", "templ", "css", "js"]
 # Ignore these filename extensions or directories.
-exclude_dir = ["tmp", "vendor", "node_modules", "bin" ]
+exclude_dir = ["tmp", "vendor", "node_modules", "bin"]
 # Watch these directories if you specified.
 include_dir = []
 # Watch these files.
@@ -76,6 +76,6 @@ keep_scroll = true
 
 # Enable live-reloading on the browser.
 [proxy]
-  enabled = true
-  proxy_port = 8090
-  app_port = 1337 
+enabled = true
+proxy_port = 8090
+app_port = 8080

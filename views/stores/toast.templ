@@ -1,0 +1,47 @@
+package stores
+
+templ ToastGlobalStore() {
+	<script type="text/javascript">
+  document.addEventListener("alpine:init", () => {
+    Alpine.store("toast", {
+      toasts: [],
+      timeout: null,
+
+      addToast(message, type = "info") {
+        var toast = { type, message };
+        this.toasts.push(toast);
+
+        if (this.toasts.length > 3) {
+          clearTimeout(this.timeout);
+          this.toasts.shift();
+        } 
+
+        this.timeout = setTimeout(() => { this.toasts.shift(); }, 3000);
+      }
+    })
+  });
+
+  document.addEventListener("htmx:beforeSwap", (event) => {
+    var contentType = event.detail.xhr.getResponseHeader("Content-Type");
+    if (contentType === "application/json") {
+      event.detail.shouldSwap = false;
+    } 
+  })
+
+  document.addEventListener("htmx:afterRequest", (event) => {
+    var contentType = event.detail.xhr.getResponseHeader("Content-Type");
+    if (contentType !== "application/json") return;
+
+    var responseData = event.detail.xhr.responseText;
+    if (responseData === "") return;
+
+    var toastType = "info";
+    if (event.detail.failed) toastType = "error";
+
+    var parsedResponse = JSON.parse(responseData);
+    var toastMessage = parsedResponse.message || "Unknown error occurred.";
+
+    Alpine.store("toast").addToast(toastMessage, toastType)
+  });
+  </script>
+}

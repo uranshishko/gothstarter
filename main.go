@@ -39,6 +39,9 @@ func init() {
 		azureadCallbackUrl,
 	)
 
+	// set custom session name
+	// auth.SessionName = "session_name"
+
 	store := sessions.NewCookieStore([]byte(sessionSecret))
 	store.MaxAge(86400 * 30)
 	store.Options.Path = "/"

@@ -13,9 +13,9 @@ import (
 	"github.com/uranshishko/gothstarter/common"
 )
 
-const (
-	SessionName = "_rw_session"
+var SessionName = "_rw_session"
 
+const (
 	UserEndpoint     = "https://graph.microsoft.com/v1.0/me"
 	AuthFlowEndpoint = "https://login.microsoftonline.com/%s/oauth2/v2.0/%s"
 )

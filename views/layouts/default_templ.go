@@ -146,7 +146,7 @@ func (l DefaultLayout) Root() templ.Component {
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
-							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" <img x-show=\"!isExpanded\" src=\"/public/acme.svg\" width=\"150\" class=\"p-2\" alt=\"placeholder logo\">")
+							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" <img x-show=\"!isExpanded\" src=\"/public/acme.svg\" width=\"150\" class=\"p-2 h-12\" alt=\"placeholder logo\">")
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -222,7 +222,7 @@ func (l DefaultLayout) Root() templ.Component {
 						}()
 					}
 					ctx = templ.InitializeContext(ctx)
-					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full flex items-center justify-center h-16\"><img src=\"/public/acme.svg\" width=\"150\" class=\"p-2\" alt=\"placeholder logo\"></div>")
+					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full flex items-center justify-center h-16\"><img src=\"/public/acme.svg\" width=\"150\" class=\"p-2 h-12\" alt=\"placeholder logo\"></div>")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -231,7 +231,7 @@ func (l DefaultLayout) Root() templ.Component {
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
-						var templ_7745c5c3_Var10 = []any{templ.KV("bg-primary bg-opacity-95 !border-l-teal-700 ",
+						var templ_7745c5c3_Var10 = []any{templ.KV("bg-primary bg-opacity-95 !border-l-primary-muted",
 							item.IsActive(l.Href)), "border-l-8 border-l-transparent hover:border-l-gray-500"}
 						templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var10...)
 						if templ_7745c5c3_Err != nil {

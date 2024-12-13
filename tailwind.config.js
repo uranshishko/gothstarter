@@ -2,11 +2,19 @@
 module.exports = {
   content: ["./**/*.{html,templ,go}"],
   plugins: [require("daisyui")],
+  theme: {
+    extend: {
+      colors: {
+        "primary-muted": "oklch(var(--primary-muted) / <alpha-value>)",
+      },
+    },
+  },
   daisyui: {
     themes: [
       {
         custom: {
           primary: "#00b7b5",
+          "--primary-muted": "60% 0.120 193",
           "primary-content": "#000c0c",
           secondary: "#00b800",
           "secondary-content": "#000c00",

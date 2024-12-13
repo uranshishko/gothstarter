@@ -37,7 +37,7 @@ templ (l DefaultLayout) Root() {
 						@ui.DrawerButton(templ.Attributes{}) {
 							@icons.Icon().Menu()
 						}
-						<img x-show="!isExpanded" src="/public/acme.svg" width="150" class="p-2" alt="placeholder logo"/>
+						<img x-show="!isExpanded" src="/public/acme.svg" width="150" class="p-2 h-12" alt="placeholder logo"/>
 					}
 					@ui.NavbarEnd() {
 						@ui.UserButton(l.User)
@@ -49,13 +49,13 @@ templ (l DefaultLayout) Root() {
 			}
 			@ui.DrawerSide() {
 				<div class="w-full flex items-center justify-center h-16">
-					<img src="/public/acme.svg" width="150" class="p-2" alt="placeholder logo"/>
+					<img src="/public/acme.svg" width="150" class="p-2 h-12" alt="placeholder logo"/>
 				</div>
 				for _, item := range Items {
 					<li class="mb-1">
 						<a
 							href={ templ.URL(item.Href) }
-							class={ templ.KV("bg-primary bg-opacity-95 !border-l-teal-700 ", 
+							class={ templ.KV("bg-primary bg-opacity-95 !border-l-primary-muted", 
               item.IsActive(l.Href)), "border-l-8 border-l-transparent hover:border-l-gray-500" }
 							@click="isExpanded = false"
 						>

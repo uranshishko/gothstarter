@@ -58,10 +58,10 @@ templ userMenu(user auth.User) {
 				</div>
 			</div>
 		</li>
-		<li class="disabled">
-			<a>
+		<li hx-boost="true">
+			<a href="/account">
 				@icons.Icon().WithSize(icons.SM).Cog()
-				Settings
+				Account	
 			</a>
 		</li>
 		<li>

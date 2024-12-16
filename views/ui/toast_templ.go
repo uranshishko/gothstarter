@@ -47,7 +47,7 @@ func Toast() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</template><span x-text=\"toast.message\"></span></div></template></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</template><div><h3 class=\"font-medium\" x-text=\"toast.message\"></h3><div class=\"text-xs\" x-text=\"toast.timestamp\"></div></div></div></template></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

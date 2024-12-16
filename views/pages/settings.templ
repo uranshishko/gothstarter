@@ -1,0 +1,46 @@
+package pages
+
+import (
+	"github.com/uranshishko/gothstarter/auth"
+	"github.com/uranshishko/gothstarter/views/layouts"
+)
+
+templ SettingsPage(user auth.User) {
+	@layouts.DefaultLayout{
+		Title: "Account | Acme",
+		Href:  "/account",
+		User:  user,
+	}.Root() {
+		<div class="card bg-base-100 w-full lg:m-auto shadow-md">
+			<div class="card-body">
+				<div>
+					<div class="card-title">
+						Account 	
+					</div>
+					<span class="text-xs">Manage your account settings</span>
+				</div>
+				<form hx-post="/account" x-data="{ dirty: false }">
+					<div class="flex flex-col gap-4 my-4 lg:[&>label]:w-1/2">
+						<label class="input input-bordered flex items-center gap-2">
+							<span class="text-primary">UID</span>
+							<input disabled="true" type="text" name="id" value={ user.Id } class="grow" placeholder="XXXX-XXXX-XXXX-XXXX"/>
+						</label>
+						<label class="input input-bordered flex items-center gap-2">
+							<span class="text-primary">Display Name</span>
+							<input disabled="true" type="text" name="displayName" value={ user.DisplayName } class="grow" placeholder="John Doe"/>
+						</label>
+						<label class="input input-bordered flex items-center gap-2">
+							<span class="text-primary">First Name</span>
+							<input type="text" @input="dirty = true" name="firstName" value={ user.FirstName } class="grow" placeholder="John"/>
+						</label>
+						<label class="input input-bordered flex items-center gap-2">
+							<span class="text-primary">Last Name</span>
+							<input type="text" @input="dirty = true" name="lastName" value={ user.LastName } class="grow" placeholder="Doe"/>
+						</label>
+					</div>
+					<input type="submit" :disabled="!dirty" class="btn btn-primary" value="Save"/>
+				</form>
+			</div>
+		</div>
+	}
+}

@@ -209,7 +209,7 @@ func userMenu(user auth.User) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div></div></li><li class=\"disabled\"><a>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div></div></li><li hx-boost=\"true\"><a href=\"/account\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -217,7 +217,7 @@ func userMenu(user auth.User) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("Settings</a></li><li><a onclick=\"logoutModal.showModal()\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("Account\t</a></li><li><a onclick=\"logoutModal.showModal()\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

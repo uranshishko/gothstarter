@@ -12,7 +12,10 @@ templ Toast() {
 				<template x-if="toast.type !== 'error'">
 					@icons.Icon().Info()
 				</template>
-				<span x-text="toast.message"></span>
+				<div>
+					<h3 class="font-medium" x-text="toast.message"></h3>
+					<div class="text-xs" x-text="toast.timestamp"></div>
+				</div>
 			</div>
 		</template>
 	</div>

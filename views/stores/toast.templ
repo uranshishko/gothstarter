@@ -6,9 +6,13 @@ templ ToastGlobalStore() {
     Alpine.store("toast", {
       toasts: [],
       timeout: null,
+      formatter: new Intl.DateTimeFormat("sv-SE", {
+        dateStyle: "short",
+        timeStyle: "short",
+      }),
 
       addToast(message, type = "info") {
-        var toast = { type, message };
+        var toast = { type, message, timestamp: this.formatter.format(new Date()) };
         this.toasts.push(toast);
 
         if (this.toasts.length > 3) {

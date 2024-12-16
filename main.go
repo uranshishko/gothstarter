@@ -65,6 +65,11 @@ func main() {
 		r.Use(middleware.AuthMiddleware)
 
 		r.Get("/", common.Make(handlers.HomeHandler))
+		r.Get("/account", common.Make(handlers.SettingsHandler))
+
+		r.Post("/account", common.Make(func(hc common.HandlerContext) error {
+			return hc.JSON(200, common.Map{"message": "Account updated successfully"})
+		}))
 	})
 
 	// Auth

@@ -3,7 +3,6 @@ package layouts
 import (
 	"github.com/uranshishko/gothstarter/auth"
 	"github.com/uranshishko/gothstarter/views/icons"
-	"github.com/uranshishko/gothstarter/views/stores"
 	"github.com/uranshishko/gothstarter/views/ui"
 )
 
@@ -29,7 +28,6 @@ type DefaultLayout struct {
 
 templ (l DefaultLayout) Root() {
 	@Base(l.Title) {
-		@stores.ToastGlobalStore()
 		@ui.Drawer() {
 			@ui.DrawerContent() {
 				@ui.Navbar() {

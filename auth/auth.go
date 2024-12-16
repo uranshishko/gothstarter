@@ -73,16 +73,20 @@ func NewMsalClient(tenantId, clientId, clientSecret, callBackUrl string) {
 	}
 }
 
-func (c *msalClient) codeFlowURL() *url.URL {
+func (c *msalClient) codeFlowURL(silently bool) *url.URL {
 	u, _ := url.Parse(fmt.Sprintf(AuthFlowEndpoint, c.tenantId, "authorize"))
 	q := u.Query()
 
 	q.Add("client_id", c.clientId)
-	q.Add("scope", "https://graph.microsoft.com/user.read")
+	q.Add("scope", "https://graph.microsoft.com/user.readwrite")
 	q.Add("response_type", "code")
 	q.Add("response_mode", "query")
 	q.Add("redirect_uri", c.callBackUrl)
-	q.Add("prompt", "select_account")
+	if silently {
+		q.Add("prompt", "none")
+	} else {
+		q.Add("prompt", "select_account")
+	}
 
 	u.RawQuery = q.Encode()
 
@@ -94,7 +98,7 @@ func (c *msalClient) requestAccessToken(code string) ([]byte, error) {
 	data := &url.Values{}
 
 	data.Set("client_id", c.clientId)
-	data.Set("scope", "https://graph.microsoft.com/user.read")
+	data.Set("scope", "https://graph.microsoft.com/user.readwrite")
 	data.Set("code", code)
 	data.Set("redirect_uri", c.callBackUrl)
 	data.Set("grant_type", "authorization_code")
@@ -124,7 +128,12 @@ func (c *msalClient) requestAccessToken(code string) ([]byte, error) {
 }
 
 func (c *msalClient) BeginAuth(hc common.HandlerContext) {
-	u := c.codeFlowURL()
+	u := c.codeFlowURL(false)
+	hc.Redirect(302, u.String())
+}
+
+func (c *msalClient) BeginSilentAuth(hc common.HandlerContext) {
+	u := c.codeFlowURL(true)
 	hc.Redirect(302, u.String())
 }
 
